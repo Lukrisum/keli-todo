@@ -42,3 +42,6 @@ GLOBAL FLAGS
 DESCRIPTION
   列出所有待办事项
 ```
+
+## LICENSE
+[MIT](https://github.com/Lukrisum/keli-todo/blob/main/LICENSE)
