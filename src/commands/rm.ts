@@ -7,8 +7,6 @@ export default class Rm extends Command {
 
   static description = '删除某个待办事项'
 
-  static args = [{ name: 'file' }]
-
   public async run(): Promise<void> {
 
     const todosSoFar = this.#db.listTodos()

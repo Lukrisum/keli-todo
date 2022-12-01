@@ -42,6 +42,25 @@ GLOBAL FLAGS
 DESCRIPTION
   列出所有待办事项
 ```
+## $ keli done --help
+```
+修改某个待办事项的状态
 
+USAGE
+  $ keli done
+
+DESCRIPTION
+  修改某个待办事项的状态
+```
+## $ keli rm --help
+```
+删除某个待办事项
+
+USAGE
+  $ keli rm
+
+DESCRIPTION
+  删除某个待办事项
+```
 ## LICENSE
 [MIT](https://github.com/Lukrisum/keli-todo/blob/main/LICENSE)
