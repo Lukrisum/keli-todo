@@ -27,7 +27,7 @@ export default class KeliList extends Command {
         minWidth: 12
       },
       status: {
-        header: "代办状态",
+        header: "待办状态",
         minWidth: 20
       },
       content: {

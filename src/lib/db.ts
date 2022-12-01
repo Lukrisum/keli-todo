@@ -42,13 +42,26 @@ export default class TodoDb {
     return stmt.all()
   }
 
-  getTask(id: number | bigint | undefined): Todo {
+  getTodo(id: number | bigint | undefined): Todo {
     const stmt = this.#client.prepare('SELECT * FROM todos WHERE id = ?')
     return stmt.get(id)
   }
 
-  completeTodo(id: number | bigint | undefined): void {
+  updateTodo(todo: Todo): Todo {
+    const stmt = this.#client.prepare(`
+      UPDATE todos
+      SET title = @title,
+          content = @content,
+          priority = @priority,
+          status = @status
+      WHERE id = @id
+    `)
+    return todo
+  }
+
+  deleteTodo(id: number | bigint | undefined): void {
     const stmt = this.#client.prepare('DELETE FROM todos WHERE id = ?')
     stmt.run(id)
   }
+
 }

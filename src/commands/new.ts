@@ -18,7 +18,7 @@ export default class KeliNew extends Command {
   }
 
   public async run(): Promise<void> {
-    
+
     const { flags } = await this.parse(KeliNew)
 
     let title = flags.title
@@ -61,6 +61,6 @@ export default class KeliNew extends Command {
     }
 
     const created = this.#db.createTodo(todo)
-    this.log(`创建了一个新的代办，优先级：${created.priority}，标题：${created.title}，内容：${created.content}`)
+    this.log(`创建了新的待办 ${created.priority.slice(1)} | ${created.title} | ${created.content}`)
   }
 }
