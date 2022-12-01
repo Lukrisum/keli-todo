@@ -21,7 +21,8 @@
     "@oclif/plugin-help": "^5",
     "@oclif/plugin-plugins": "^2.1.7",
     "better-sqlite3": "^8.0.0",
-    "inquirer": "^8.0.1"
+    "inquirer": "^8.0.1",
+    "listr": "^0.14.3"
   },
   "devDependencies": {
     "@oclif/test": "^2.2.12",

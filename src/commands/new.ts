@@ -9,7 +9,7 @@ export default class KeliNew extends Command {
   static description = '创建一条新的待办事项'
 
   static examples = [
-    '<%= config.bin %> <%= command.id %> --title "闪" --content "明天下午 5:00 ，天健运动场，与 halalala222"',
+    '<%= config.bin %> <%= command.id %> --title "闪" --content "明天下午 5:00 ，天健运动场，与 halalala222"'
   ]
 
   static flags = {
@@ -51,7 +51,6 @@ export default class KeliNew extends Command {
         choices: ['高 🔥🔥🔥', '中 🔥🔥', '低 🔥']
       }
     ])
-
     const priority = resPriority.priority
 
     const todo: Todo = {
@@ -62,8 +61,6 @@ export default class KeliNew extends Command {
     }
 
     const created = this.#db.createTodo(todo)
-    this.log(this.config.dataDir)
-
     this.log(`创建了一个新的代办，优先级：${created.priority}，标题：${created.title}，内容：${created.content}`)
   }
 }
