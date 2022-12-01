@@ -17,10 +17,11 @@ export default class TodoDb {
 
   setup(): void {
     this.#client.exec(`
-      CREATE TABLE IF NOT EXISTS todo (
+      CREATE TABLE IF NOT EXISTS todos (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         title TEXT NOT NULL,
         content TEXT NOT NULL,
+        priority TEXT NOT NULL,
         status TEXT NOT NULL
       )
     `)
@@ -28,15 +29,24 @@ export default class TodoDb {
 
   createTodo(todo: Todo): Todo {
     const stmt = this.#client.prepare(`
-      INSERT INTO todo (title, content, status)
-      VALUES (@title ,@content, @status)
+      INSERT INTO todos (title, content, priority, status)
+      VALUES (@title ,@content, @priority, @status)
     `)
 
     const info = stmt.run(todo)
     return { ...todo, id: info.lastInsertRowid }
   }
 
-  // listTodos(): Todo[] { }
-  // getTask(id: number): Todo { }
-  // completeTodo(id: number): Todo { }
+  listTodos(): Todo[] {
+    const stmt = this.#client.prepare<Todo[]>('SELECT * FROM todos')
+    return stmt.all()
+  }
+
+  // getTask(id: number): Todo { 
+  //   const stmt = this.#client.prepare<Todo>(`SELECT * FROM todos WHERE id=${}`)
+  // }
+
+  // completeTodo(id: number): Todo {
+    
+  // }
 }

@@ -1,7 +1,7 @@
 import { Command, Flags } from '@oclif/core'
 import inquirer from 'inquirer'
-import TodoDb from '../../lib/db'
-import { Todo } from '../../lib/type'
+import TodoDb from '../lib/db'
+import { Todo } from '../lib/type'
 
 export default class KeliNew extends Command {
   #db = new TodoDb(this.config.dataDir)
@@ -9,7 +9,7 @@ export default class KeliNew extends Command {
   static description = '创建一条新的待办事项'
 
   static examples = [
-    '<%= command.id %> --title "闪" --content "明天下午 5:00 ，天健运动场，与 halalala222"',
+    '<%= config.bin %> <%= command.id %> --title "闪" --content "明天下午 5:00 ，天健运动场，与 halalala222"',
   ]
 
   static flags = {
@@ -18,6 +18,7 @@ export default class KeliNew extends Command {
   }
 
   public async run(): Promise<void> {
+    
     const { flags } = await this.parse(KeliNew)
 
     let title = flags.title
@@ -25,9 +26,7 @@ export default class KeliNew extends Command {
       const res = await inquirer.prompt([
         {
           name: 'title',
-          message: '选择标题',
-          type: 'list',
-          choices: ['闪', '润', '寄', '休', '眠']
+          message: '输入标题',
         }
       ])
       title = res.title
@@ -44,15 +43,27 @@ export default class KeliNew extends Command {
       content = res.content
     }
 
+    const resPriority = await inquirer.prompt([
+      {
+        name: 'priority',
+        message: '选择优先级',
+        type: 'list',
+        choices: ['高 🔥🔥🔥', '中 🔥🔥', '低 🔥']
+      }
+    ])
+
+    const priority = resPriority.priority
+
     const todo: Todo = {
       title: title || '',
       content: content || '',
+      priority: priority || '',
       status: 'doing'
     }
 
     const created = this.#db.createTodo(todo)
     this.log(this.config.dataDir)
 
-    this.log(`创建了一个新的代办，标题：${created.title}，内容：${created.content}，id：${created.id}`)
+    this.log(`创建了一个新的代办，优先级：${created.priority}，标题：${created.title}，内容：${created.content}`)
   }
 }
