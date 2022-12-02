@@ -25,7 +25,7 @@ export abstract class ExtendCmd extends Command {
         const resNext = await inquirer.prompt([
           {
             name: 'next',
-            message: `设置数据存放目录为：${res.dataDir}？`,
+            message: `确认设置数据存放目录为：${res.dataDir}？`,
             type: 'confirm'
           }
         ])
