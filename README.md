@@ -1,5 +1,15 @@
-# keli-todo Design
+# keli-todo Docs
 
+## $ keli init --help
+```
+初始化数据存放目录
+
+USAGE
+  $ keli init
+
+DESCRIPTION
+  初始化数据存放目录
+```
 ## $ keli new --help
 ```
 创建一条新的待办事项
