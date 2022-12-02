@@ -56,6 +56,7 @@ export default class TodoDb {
           status = @status
       WHERE id = @id
     `)
+    stmt.run(todo)
     return todo
   }
 
