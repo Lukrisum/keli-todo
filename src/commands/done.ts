@@ -6,6 +6,7 @@ export default class Done extends ExtendCmd {
   static description = '修改某个待办事项的状态'
 
   public async run(): Promise<void> {
+    // try {
     const db = new TodoDb(await this.initDataDir())
     const todosSoFar = db.listTodos()
 

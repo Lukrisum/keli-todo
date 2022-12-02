@@ -12,7 +12,7 @@ export default class KeliList extends ExtendCmd {
 
   public static enableJsonFlag = true
 
-  public async run(): Promise<Todo[]> {
+  public async run(): Promise<void> {
     const db = new TodoDb(await this.initDataDir())
     const { flags } = await this.parse(KeliList)
 
@@ -38,7 +38,5 @@ export default class KeliList extends ExtendCmd {
       printLine: this.log.bind(this),
       ...flags
     })
-
-    return todos
   }
 }

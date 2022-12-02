@@ -63,3 +63,4 @@ export default class KeliNew extends ExtendCmd {
     this.log(`创建了新的待办 ${created.priority.slice(1)} | ${created.title} | ${created.content}`)
   }
 }
+
