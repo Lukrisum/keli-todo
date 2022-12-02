@@ -1,10 +1,9 @@
-import { Command, CliUx } from '@oclif/core'
+import { CliUx } from '@oclif/core'
+import { ExtendCmd } from '../lib/class'
 import TodoDb from '../lib/db'
 import { Todo } from '../lib/type'
 
-export default class KeliList extends Command {
-  #db = new TodoDb(this.config.dataDir)
-
+export default class KeliList extends ExtendCmd {
   static description = '列出所有待办事项'
 
   static flags = {
@@ -14,9 +13,10 @@ export default class KeliList extends Command {
   public static enableJsonFlag = true
 
   public async run(): Promise<Todo[]> {
+    const db = new TodoDb(await this.initDataDir())
     const { flags } = await this.parse(KeliList)
 
-    const todos = this.#db.listTodos()
+    const todos = db.listTodos()
 
     CliUx.ux.table(todos, {
       title: {

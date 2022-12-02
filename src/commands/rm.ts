@@ -1,15 +1,14 @@
-import { Command } from '@oclif/core'
 import inquirer from 'inquirer'
+import { ExtendCmd } from '../lib/class'
 import TodoDb from '../lib/db'
 
-export default class Rm extends Command {
-  #db = new TodoDb(this.config.dataDir)
+export default class Rm extends ExtendCmd {
 
   static description = '删除某个待办事项'
 
   public async run(): Promise<void> {
-
-    const todosSoFar = this.#db.listTodos()
+    const db = new TodoDb(await this.initDataDir())
+    const todosSoFar = db.listTodos()
 
     const resIndex = await inquirer.prompt([
       {
@@ -37,6 +36,6 @@ export default class Rm extends Command {
       return;
     }
 
-    this.#db.deleteTodo(id)
+    db.deleteTodo(id)
   }
 }

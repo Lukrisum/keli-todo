@@ -1,16 +1,12 @@
 import BetterSqlite3 from 'better-sqlite3'
 import { Todo } from "./type"
 import path from 'node:path'
-import { existsSync, mkdirSync } from 'node:fs'
 
 export default class TodoDb {
 
   #client: BetterSqlite3.Database
 
   constructor(dataDir: string) {
-    if (!existsSync(dataDir)) {
-      mkdirSync(dataDir, { recursive: true })
-    }
     this.#client = new BetterSqlite3(path.join(dataDir, 'keli.db'))
     this.setup()
   }

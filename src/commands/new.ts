@@ -1,11 +1,10 @@
-import { Command, Flags } from '@oclif/core'
+import { Flags } from '@oclif/core'
 import inquirer from 'inquirer'
+import { ExtendCmd } from '../lib/class'
 import TodoDb from '../lib/db'
 import { Todo } from '../lib/type'
 
-export default class KeliNew extends Command {
-  #db = new TodoDb(this.config.dataDir)
-
+export default class KeliNew extends ExtendCmd {
   static description = '创建一条新的待办事项'
 
   static examples = [
@@ -18,7 +17,7 @@ export default class KeliNew extends Command {
   }
 
   public async run(): Promise<void> {
-
+    const db = new TodoDb(await this.initDataDir())
     const { flags } = await this.parse(KeliNew)
 
     let title = flags.title
@@ -60,7 +59,7 @@ export default class KeliNew extends Command {
       status: 'doing'
     }
 
-    const created = this.#db.createTodo(todo)
+    const created = db.createTodo(todo)
     this.log(`创建了新的待办 ${created.priority.slice(1)} | ${created.title} | ${created.content}`)
   }
 }
